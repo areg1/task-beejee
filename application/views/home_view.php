@@ -10,8 +10,7 @@
 ?>
 
 <div class='main-container'>
-<?php if(count($data['tasks']) > 0): ?>
-
+<div class="d-flex justify-content-between align-items-end">
     <form class="filter-form" action="/home/filter" method="POST">
         <div class="form-group mr-4">
             <label for="sortBySelect">Sort By</label>
@@ -40,6 +39,18 @@
             <button type="submit" class="btn btn-secondary">Filter</button>
         </div>
     </form>
+
+    <div class="form-group">
+        <?php if (isset($_SESSION['login'])): ?>
+            <a href="/auth/logout" class="btn btn-outline-secondary">Sign out</a>
+        <?php else: ?>
+            <a href="/auth" class="btn btn-secondary">Sign in</a>
+        <?php endif; ?>
+
+    </div>
+
+</div>    
+<?php if(count($data['tasks']) > 0): ?>
 
     <div class="table-container">
         <table class="table">
@@ -116,7 +127,7 @@
     <h2 class="mb-5">Nothing to show</h2>
 <?php endif ?>
     
-    <div class="">
+    <div class="mt-5">
         <a href="/task/create" class="btn btn-dark" role="button">Add new task</a>
     </div>
 

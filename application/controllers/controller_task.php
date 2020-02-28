@@ -3,13 +3,12 @@ include ROOT . '/application/models/task.php';
 
 class Controller_Task extends Controller 
 {
-    public $task;
     
-    function __construct()
-    {
-        parent::__construct();
-		$this->task = new Model_Task();
-    }
+    function __construct() 
+	{
+		parent::__construct();
+		new Model_Task();
+	}
 
     public function action_create()
     {
@@ -35,6 +34,11 @@ class Controller_Task extends Controller
             header("Location: $link");
         }
 
+    }
+
+    public function edit()
+    {
+        
     }
 
     private function resetSessions()

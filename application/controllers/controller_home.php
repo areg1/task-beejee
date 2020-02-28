@@ -7,7 +7,7 @@ class Controller_Home extends Controller
 	function __construct() 
 	{
 		parent::__construct();
-		$this->task = new Model_Task();
+		new Model_Task();
 	}
 
 	function action_index()
