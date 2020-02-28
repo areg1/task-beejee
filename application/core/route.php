@@ -5,7 +5,7 @@ class Route
 	static function start()
 	{
 		// контроллер и действие по умолчанию
-		$controller_name = 'Main';
+		$controller_name = 'Home';
 		$action_name = 'index';
 		
 		$routes = explode('/', $_SERVER['REQUEST_URI']);
@@ -13,13 +13,13 @@ class Route
 		// получаем имя контроллера
 		if ( !empty($routes[1]) )
 		{	
-			$controller_name = $routes[1];
+			$controller_name = explode('?', $routes[1])[0];
 		}
 		
 		// получаем имя экшена
 		if ( !empty($routes[2]) )
 		{
-			$action_name = $routes[2];
+			$action_name = explode('?', $routes[2])[0];
 		}
 
 		// добавляем префиксы

@@ -2,7 +2,7 @@
 
 include ROOT . '/application/models/task.php';
 
-class Controller_Main extends Controller
+class Controller_Home extends Controller
 {
 
 	public $task;
@@ -15,7 +15,12 @@ class Controller_Main extends Controller
 
 	function action_index()
 	{	
-		$data = $this->task->get_data();
+		$data['active_page'] = $_GET['page'] ?? 1;
+		$count = 3;
+		$start = ($data['active_page'] - 1) * 3;
+		$data['tasks'] = $this->task->get_data($count, $start);
+		$data['pages_count'] = ceil($this->task->get_count() / $count);
+
 		$this->view->generate('main_view.php', 'template_view.php', $data);
 	}
 
