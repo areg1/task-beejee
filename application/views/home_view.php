@@ -1,3 +1,14 @@
+<?php 
+    if(isset($_SESSION['created_notification'])):
+        unset($_SESSION['created_notification']);
+?>
+<script>
+    toastr.success('Created succesfully');
+</script>
+<?php
+    endif;
+?>
+
 <div class='main-container'>
 <?php if(count($data['tasks']) > 0): ?>
 

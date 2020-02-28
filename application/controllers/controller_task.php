@@ -13,7 +13,9 @@ class Controller_Task extends Controller
 
     public function action_create()
     {
-		$this->view->generate('task_view.php', 'template_view.php');
+        
+        $this->view->generate('task_view.php', 'template_view.php');
+        $this->resetSessions();
     }
 
     public function action_store()
@@ -28,6 +30,8 @@ class Controller_Task extends Controller
             Model_Task::create($_SESSION['name'], $_SESSION['email'], $_SESSION['text']);
             $this->resetSessions();
             $this->resetFilters();
+            $_SESSION['created_notification'] = true;
+
             header("Location: $link");
         }
 
