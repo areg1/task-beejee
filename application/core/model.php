@@ -2,18 +2,17 @@
 
 class Model
 {
-	public $conn;
+	public static $conn;
 
 	function __construct() 
 	{
 		$db = require_once('application/config/database.php');
-		$this->conn = new mysqli($db['host'], $db['user'], $db['password'], $db['dbname']);
-		if($this->conn->connect_error) {
+		self::$conn = new mysqli($db['host'], $db['user'], $db['password'], $db['dbname']);
+		if(self::$conn->connect_error) {
 			die('Data Base connect problem');
 		} else {
-			mysqli_set_charset($this->conn,'utf8');
-		}
-			
+			mysqli_set_charset(self::$conn,'utf8');
+		}			
 	}
 
 }

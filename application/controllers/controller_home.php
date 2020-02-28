@@ -3,10 +3,7 @@
 include ROOT . '/application/models/task.php';
 
 class Controller_Home extends Controller
-{
-
-	public $task;
-	
+{	
 	function __construct() 
 	{
 		parent::__construct();
@@ -29,8 +26,8 @@ class Controller_Home extends Controller
 		$data['active_page'] = $_GET['page'] ?? 1;
 		$count = 3;
 		$start = ($data['active_page'] - 1) * 3;
-		$data['tasks'] = $this->task->get_data($count, $start, $sortBy, $_SESSION['status']);
-		$data['pages_count'] = ceil($this->task->get_count($_SESSION['status']) / $count);
+		$data['tasks'] = Model_Task::get_data($count, $start, $sortBy, $_SESSION['status']);
+		$data['pages_count'] = ceil(Model_Task::get_count($_SESSION['status']) / $count);
 		$data['sort_by_filter'] = $this->getSortByFilterData();
 		$data['sort_by_selected'] = $_SESSION['sort_by'];		
 		$data['status_filter'] = $this->getStatusFilterData();
@@ -47,12 +44,7 @@ class Controller_Home extends Controller
 		if(isset($_POST['status_filter'])) {
 			$_SESSION['status'] = $_POST['status_filter'];
 		}
-		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-			$link = "https://"; 
-		} else {
-			$link = "http://"; 
-		}
-		$link .= $_SERVER['HTTP_HOST'];
+		$link = getSiteLink();
 		header("Location: $link");
 	}
 

@@ -6,4 +6,7 @@ $(document).ready(function() {
     
         window.location.href = '/home?page=' + i;
     });
+    $('textarea').each(function () {
+        $(this).val($(this).val().trim());
+    });
 });

@@ -17,3 +17,9 @@ body {
 .table-container {
     margin-top: 16px;
 }
+
+.form-container {
+    width: 500px;
+    margin: auto;
+    margin-top: 32px;
+}

@@ -1,4 +1,5 @@
 <div class='main-container'>
+<?php if(count($data['tasks']) > 0): ?>
 
     <form class="filter-form" action="/home/filter" method="POST">
         <div class="form-group mr-4">
@@ -100,5 +101,12 @@
     </nav>
 
     <?php endif ?>
+<?php else: ?>
+    <h2 class="mb-5">Nothing to show</h2>
+<?php endif ?>
+    
+    <div class="">
+        <a href="/task/create" class="btn btn-dark" role="button">Add new task</a>
+    </div>
 
 </div>
