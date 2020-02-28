@@ -2,7 +2,18 @@ body {
     background-color: rgb(243, 243, 243);
 }
 
-.table-container {
+.main-container {
     width: 95%;
     margin: 40px auto;
+}
+
+.filter-form {
+    max-width: 550px;
+    display: flex;
+    align-items: flex-end;
+
+}
+
+.table-container {
+    margin-top: 16px;
 }
