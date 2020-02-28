@@ -64,7 +64,7 @@
 <?php if(count($data['tasks']) > 0): ?>
 
     <div class="table-container">
-        <table class="table">
+        <table class="table table-hover table-striped table-border">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"></th>
