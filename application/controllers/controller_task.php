@@ -36,9 +36,42 @@ class Controller_Task extends Controller
 
     }
 
-    public function edit()
+    public function action_edit()
     {
-        
+        $link = getSiteLink();
+        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $id = end($routes);
+        $data['task'] = Model_Task::get_by_id($id);
+        if ($data['task'] === null) {
+            header("Location: {$link}/404");
+        } else {
+            $this->view->generate('edit-task_view.php', 'template_view.php', $data);
+            $this->resetSessions();
+        }
+    }
+
+    public function action_update()
+    {
+        $link = getSiteLink();
+        if (isset($_SESSION['login'])) {
+            $routes = explode('/', $_SERVER['REQUEST_URI']);
+            $id = end($routes);
+            if (empty($_POST['text'])) {
+                $_SESSION['errors'] = ['Text field is required'];
+                header("Location: {$link}/task/edit/{$id}");
+            } else {
+                $text = trim(htmlspecialchars($_POST['text']));
+                $status =  $_POST['status'] ? 1 : 0;
+                $task = Model_Task::get_by_id($id);
+                $adminEdited = $task['text'] !== $text ? 1 : 0;
+                Model_Task::update($id, $text, $status, $adminEdited);
+                $this->resetSessions();
+                header("Location: $link");
+            }
+        } else {
+            $_SESSION['error_notification'] = true;
+            header("Location: $link");
+        }
     }
 
     private function resetSessions()

@@ -9,6 +9,17 @@
     endif;
 ?>
 
+<?php 
+    if(isset($_SESSION['error_notification'])):
+        unset($_SESSION['error_notification']);
+?>
+<script>
+    toastr.error('Unauthorized !');
+</script>
+<?php
+    endif;
+?>
+
 <div class='main-container'>
 <div class="d-flex justify-content-between align-items-end">
     <form class="filter-form" action="/home/filter" method="POST">
@@ -67,7 +78,15 @@
             <tbody>
                 <?php foreach($data['tasks'] as $value):  ?>
                 <tr>
-                    <th scope="row">&middot;</th>
+                    <th scope="row">
+                        <?php if (isset($_SESSION['login'])): ?>
+                            <a href="/task/edit/<?=$value['id']?>">
+                                <img src="../../images/edit.png">
+                            </a>
+                        <?php else: ?>
+                            &middot;
+                        <?php endif; ?>
+                    </th>
                     <td><?=$value['name']?></td>
                     <td><?=$value['email']?></td>
                     <td><?=$value['text']?></td>
